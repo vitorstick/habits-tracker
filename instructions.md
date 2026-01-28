@@ -89,7 +89,7 @@
 > Tailwind CSS v4 uses CSS-based configuration with the `@theme` directive instead of JavaScript config files. Custom colors use kebab-case (e.g., `bg-brand-gray-light` instead of `bg-brand-grayLight`).
 
 ### 1.3 Google Fonts Setup
-- [ ] Add Nunito font to `index.html`:
+- [x] Add Nunito font to `index.html`:
   ```html
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
