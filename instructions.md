@@ -97,7 +97,7 @@
   ```
 
 ### 1.4 Base Styles
-- [ ] Update `src/index.css` with Tailwind directives and base styles:
+- [x] Update `src/index.css` with Tailwind directives and base styles:
   ```css
   @tailwind base;
   @tailwind components;
@@ -130,28 +130,28 @@
 - Add `active:` state for non-JS fallback
 
 ### 2.2 HabitNode Component
-- [ ] Create `src/components/habit/HabitNode.jsx`
-- [ ] Fixed size: `w-20 h-20` (80px) circular button
-- [ ] Implement three states:
-  - [ ] **Completed:** Green background, checkmark icon (Lucide `Check`)
-  - [ ] **Pending:** Gray background, habit icon or `Circle` icon
-  - [ ] **Locked:** Reduced opacity (50%), `Lock` icon
-- [ ] Add hover effect: scale(1.05)
-- [ ] Add tap animation: scale(0.95)
-- [ ] Props: `habit`, `onClick`, `isLocked`, `isCompleted`
+- [x] Create `src/components/habit/HabitNode.jsx` (Converted to .tsx)
+- [x] Fixed size: `w-20 h-20` (80px) circular button
+- [x] Implement three states:
+  - [x] **Completed:** Green background, checkmark icon (Lucide `Check`)
+  - [x] **Pending:** Gray background, habit icon or `Circle` icon
+  - [x] **Locked:** Reduced opacity (50%), `Lock` icon
+- [x] Add hover effect: scale(1.05)
+- [x] Add tap animation: scale(0.95)
+- [x] Props: `habit`, `onClick`, `isLocked`, `isCompleted`
 
 ### 2.3 ProgressRing Component
-- [ ] Create `src/components/ui/ProgressRing.jsx`
-- [ ] SVG-based circular progress indicator
-- [ ] Props: `progress` (0-100), `size`, `strokeWidth`, `color`
-- [ ] Animate stroke-dashoffset with Framer Motion
-- [ ] Use for streak display and monthly progress
+- [x] Create `src/components/ui/ProgressRing.tsx`
+- [x] SVG-based circular progress indicator
+- [x] Props: `progress` (0-100), `size`, `strokeWidth`, `color`
+- [x] Animate stroke-dashoffset with Framer Motion
+- [x] Use for streak display and monthly progress
 
 ### 2.4 StreakFlame Component
-- [ ] Create `src/components/ui/StreakFlame.jsx`
-- [ ] Display flame icon (`Flame` from Lucide) with streak count
-- [ ] Animate flame with pulse effect when streak increases
-- [ ] Props: `streakCount`, `isActive`
+- [x] Create `src/components/ui/StreakFlame.tsx`
+- [x] Display flame icon (`Flame` from Lucide) with streak count
+- [x] Animate flame with pulse effect when streak increases
+- [x] Props: `streakCount`, `isActive`
 
 ---
 
