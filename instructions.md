@@ -411,7 +411,7 @@
 - [ ] Document required environment variables in README
 
 ### 9.3 Update API Functions
-- [ ] Update `src/api/habits.js` to use real endpoints
+- [ ] Update `src/api/habits.ts` to use real endpoints
 - [ ] Replace mock data with actual API calls
 - [ ] Handle error responses
 - [ ] Add retry logic for failed requests
@@ -424,66 +424,56 @@
 
 ---
 
-## Phase 10: Testing & Quality Assurance
+## Phase 10: Deployment
+
+**Objective:** Deploy the application to production.
+
+### 10.1 Build Configuration
+- [ ] Test production build: `npm run build`
+- [ ] Verify build output in `dist/` folder
+- [ ] Test production build locally: `npm run preview`
+
+### 10.2 Hosting Setup
+- [ ] Choose hosting platform (Vercel, Netlify, Cloudflare Pages)
+- [ ] Connect GitHub repository
+- [ ] Configure build settings
+- [ ] Set environment variables in hosting platform
+
+### 10.3 Domain & SSL
+- [ ] Configure custom domain (optional)
+- [ ] Ensure HTTPS is enabled
+- [ ] Test PWA installation on mobile device
+
+---
+
+## Phase 11: Testing & Quality Assurance
 
 **Objective:** Ensure app reliability and performance.
 
-### 10.1 Unit Testing Setup
+### 11.1 Unit Testing Setup
 - [ ] Install Vitest: `npm install -D vitest @testing-library/react @testing-library/jest-dom`
 - [ ] Configure `vitest.config.ts`
 - [ ] Write tests for utility functions
 - [ ] Write tests for custom hooks
 
-### 10.2 Component Testing
+### 11.2 Component Testing
 - [ ] Test `TactileButton` component
 - [ ] Test `HabitNode` component
 - [ ] Test `ProgressRing` component
-- [ ] Aim for >80% coverage on critical components
 
-### 10.3 E2E Testing (Optional)
-- [ ] Install Playwright: `npm install -D @playwright/test`
-- [ ] Write E2E test for habit completion flow
-- [ ] Write E2E test for navigation
 
-### 10.4 Performance Optimization
+### 11.3 Performance Optimization
 - [ ] Run Lighthouse audit
 - [ ] Optimize bundle size (code splitting)
 - [ ] Lazy load routes with `React.lazy()`
 - [ ] Optimize images (use WebP format)
 - [ ] Add performance monitoring (Web Vitals)
 
-### 10.5 Accessibility Audit
-- [ ] Test keyboard navigation
-- [ ] Add ARIA labels to interactive elements
-- [ ] Ensure color contrast meets WCAG AA standards
-- [ ] Test with screen reader (NVDA/JAWS/VoiceOver)
-
----
-
-## Phase 11: Deployment
-
-**Objective:** Deploy the application to production.
-
-### 11.1 Build Configuration
-- [ ] Test production build: `npm run build`
-- [ ] Verify build output in `dist/` folder
-- [ ] Test production build locally: `npm run preview`
-
-### 11.2 Hosting Setup
-- [ ] Choose hosting platform (Vercel, Netlify, Cloudflare Pages)
-- [ ] Connect GitHub repository
-- [ ] Configure build settings
-- [ ] Set environment variables in hosting platform
-
-### 11.3 Domain & SSL
-- [ ] Configure custom domain (optional)
-- [ ] Ensure HTTPS is enabled
-- [ ] Test PWA installation on mobile device
-
 ### 11.4 Monitoring
 - [ ] Set up error tracking (Sentry, LogRocket)
 - [ ] Set up analytics (Google Analytics, Plausible)
 - [ ] Monitor Core Web Vitals
+
 
 ---
 
