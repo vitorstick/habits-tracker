@@ -371,13 +371,13 @@
 **Objective:** Add delightful micro-interactions and animations.
 
 ### 8.1 Page Transitions
-- [ ] Install `framer-motion` AnimatePresence
-- [ ] Add page transition animations
-- [ ] Implement slide transitions for modal
+- [x] Install `framer-motion` AnimatePresence
+- [x] Add page transition animations
+- [x] Implement slide transitions for modal
 
 ### 8.2 Habit Completion Animation
-- [ ] Confetti explosion on habit completion
-- [ ] Success sound effect (optional)
+- [x] Confetti explosion on habit completion
+- [x] Success sound effect (optional)
 - [ ] Haptic feedback on mobile (Vibration API)
 - [ ] Streak milestone celebrations (special confetti at 7, 30, 100 days)
 
