@@ -5,4 +5,5 @@ export interface Habit {
     title: string;
     icon?: React.ReactNode;
     status: 'pending' | 'completed' | 'locked';
+    completedDates: string[];
 }

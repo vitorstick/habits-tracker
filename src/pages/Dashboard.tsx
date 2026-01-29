@@ -4,29 +4,35 @@ import MobileLayout from '../layouts/MobileLayout';
 import HabitNode from '../components/habit/HabitNode';
 import LogHabitModal from '../components/modals/LogHabitModal';
 import { Habit } from '../types';
-import { Droplets, Dumbbell, BookOpen, Moon, Sun, Wind } from 'lucide-react';
+import { Droplets, Dumbbell, BookOpen, Moon, Sun, Wind, HelpCircle } from 'lucide-react';
+import { useHabits } from '../hooks/useHabits';
+import { useLogHabit } from '../hooks/useLogHabit';
 
 const Dashboard: React.FC = () => {
-    // Mock habits with a winding path structure
-    const [habits, setHabits] = useState<Habit[]>([
-        { id: 1, title: 'Morning Water', icon: <Droplets size={32} />, status: 'completed' },
-        { id: 2, title: 'Read 10 Pages', icon: <BookOpen size={32} />, status: 'completed' },
-        { id: 3, title: 'Meditation', icon: <Wind size={32} />, status: 'pending' },
-        { id: 4, title: 'Exercise', icon: <Dumbbell size={32} />, status: 'pending' },
-        { id: 5, title: 'Journaling', icon: <Sun size={32} />, status: 'locked' },
-        { id: 6, title: 'Sleep Well', icon: <Moon size={32} />, status: 'locked' },
-    ]);
-
+    const { data: habits = [], isLoading } = useHabits();
+    const { mutate: logHabit } = useLogHabit();
     const [selectedHabit, setSelectedHabit] = useState<Habit | null>(null);
 
+    // Helper to map habit titles to icons (since our simple mock API doesn't store React nodes)
+    const getIconForHabit = (title: string) => {
+        switch (title) {
+            case 'Morning Water': return <Droplets size={32} />;
+            case 'Read 10 Pages': return <BookOpen size={32} />;
+            case 'Meditation': return <Wind size={32} />;
+            case 'Exercise': return <Dumbbell size={32} />;
+            case 'Journaling': return <Sun size={32} />;
+            case 'Sleep Well': return <Moon size={32} />;
+            default: return <HelpCircle size={32} />;
+        }
+    };
+
     const handleHabitClick = (habit: Habit) => {
-        setSelectedHabit(habit);
+        // Hydrate the habit with its icon before opening modal
+        setSelectedHabit({ ...habit, icon: getIconForHabit(habit.title) });
     };
 
     const handleCompleteHabit = (id: string | number) => {
-        setHabits(prev => prev.map(h =>
-            h.id === id ? { ...h, status: 'completed' } : h
-        ));
+        logHabit(id);
     };
 
     // Offsets for the zigzag path
@@ -53,6 +59,16 @@ const Dashboard: React.FC = () => {
         show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 300, damping: 24 } }
     };
 
+    if (isLoading) {
+        return (
+            <MobileLayout>
+                <div className="flex items-center justify-center min-h-[50vh]">
+                    <div className="w-8 h-8 border-4 border-brand-blue border-t-transparent rounded-full animate-spin" />
+                </div>
+            </MobileLayout>
+        );
+    }
+
     return (
         <MobileLayout>
             {/* The Winding Path */}
@@ -72,7 +88,7 @@ const Dashboard: React.FC = () => {
                         className={`transition-transform duration-500 ${getOffsetClass(index)}`}
                     >
                         <HabitNode
-                            habit={habit}
+                            habit={{ ...habit, icon: getIconForHabit(habit.title) }}
                             onClick={handleHabitClick}
                         />
                         <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-max">
