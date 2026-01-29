@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, BarChart2, User, Settings } from 'lucide-react';
+import { Home, BarChart2, User, Trophy } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 interface NavItemProps {
@@ -54,13 +54,13 @@ const NavigationBar: React.FC = () => {
                 onClick={() => navigate('/stats')}
             />
             <NavItem
-                icon={User}
-                label="Quest"
+                icon={Trophy}
+                label="Leaderboard"
                 isActive={getActiveTab('/leaderboard')}
                 onClick={() => navigate('/leaderboard')}
             />
             <NavItem
-                icon={Settings}
+                icon={User}
                 label="Profile"
                 isActive={getActiveTab('/profile')}
                 onClick={() => navigate('/profile')}
