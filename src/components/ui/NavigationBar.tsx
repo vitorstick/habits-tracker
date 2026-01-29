@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Home, BarChart2, User, Settings } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
@@ -28,33 +29,41 @@ const NavItem: React.FC<NavItemProps> = ({ icon: Icon, label, isActive, onClick 
 );
 
 const NavigationBar: React.FC = () => {
-    const [activeTab, setActiveTab] = React.useState('home');
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    // Determine active tab based on path
+    const getActiveTab = (path: string) => {
+        if (path === '/' && location.pathname === '/') return true;
+        if (path !== '/' && location.pathname.startsWith(path)) return true;
+        return false;
+    };
 
     return (
         <nav className="fixed bottom-0 left-0 right-0 h-20 bg-white border-t-2 border-brand-gray px-4 pb-safe flex items-center justify-around z-50">
             <NavItem
                 icon={Home}
                 label="Home"
-                isActive={activeTab === 'home'}
-                onClick={() => setActiveTab('home')}
+                isActive={getActiveTab('/')}
+                onClick={() => navigate('/')}
             />
             <NavItem
                 icon={BarChart2}
                 label="Stats"
-                isActive={activeTab === 'stats'}
-                onClick={() => setActiveTab('stats')}
+                isActive={getActiveTab('/stats')}
+                onClick={() => navigate('/stats')}
             />
             <NavItem
                 icon={User}
                 label="Quest"
-                isActive={activeTab === 'quest'}
-                onClick={() => setActiveTab('quest')}
+                isActive={getActiveTab('/leaderboard')}
+                onClick={() => navigate('/leaderboard')}
             />
             <NavItem
                 icon={Settings}
                 label="Profile"
-                isActive={activeTab === 'profile'}
-                onClick={() => setActiveTab('profile')}
+                isActive={getActiveTab('/profile')}
+                onClick={() => navigate('/profile')}
             />
         </nav>
     );

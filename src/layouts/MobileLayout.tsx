@@ -1,5 +1,6 @@
 import React from 'react';
 import NavigationBar from '../components/ui/NavigationBar';
+import TopBar from '../components/ui/TopBar';
 
 interface MobileLayoutProps {
     children: React.ReactNode;
@@ -8,8 +9,11 @@ interface MobileLayoutProps {
 const MobileLayout: React.FC<MobileLayoutProps> = ({ children }) => {
     return (
         <div className="min-h-screen bg-brand-gray-light flex flex-col max-w-md mx-auto relative shadow-2xl">
+            {/* Top Bar */}
+            <TopBar />
+
             {/* Content Area */}
-            <main className="flex-1 pb-24 overflow-y-auto overflow-x-hidden">
+            <main className="flex-1 pt-20 pb-24 overflow-y-auto overflow-x-hidden">
                 {children}
             </main>
 

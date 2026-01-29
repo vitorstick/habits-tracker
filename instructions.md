@@ -160,35 +160,35 @@
 **Objective:** Create the mobile-first layout structure and navigation.
 
 ### 3.1 MobileLayout Component
-- [ ] Create `src/layouts/MobileLayout.jsx`
-- [ ] Container: `max-w-md mx-auto min-h-screen bg-white relative`
-- [ ] Implement fixed top bar:
-  - [ ] Left: App logo/title
-  - [ ] Center: Monthly progress ring
-  - [ ] Right: Streak flame
-- [ ] Implement fixed bottom navigation:
-  - [ ] Home icon (`Home`)
-  - [ ] Leaderboard icon (`Trophy`)
-  - [ ] Profile icon (`User`)
-- [ ] Add safe area padding for mobile devices
-- [ ] Main content area with `pb-20 pt-16` for fixed nav spacing
+- [x] Create `src/layouts/MobileLayout.jsx`
+- [x] Container: `max-w-md mx-auto min-h-screen bg-white relative`
+- [x] Implement fixed top bar:
+  - [x] Left: App logo/title
+  - [x] Center: Monthly progress ring
+  - [x] Right: Streak flame
+- [x] Implement fixed bottom navigation:
+  - [x] Home icon (`Home`)
+  - [x] Leaderboard icon (`Trophy`)
+  - [x] Profile icon (`User`)
+- [x] Add safe area padding for mobile devices
+- [x] Main content area with `pb-20 pt-16` for fixed nav spacing
 
 ### 3.2 Dashboard Page - "The Path"
-- [ ] Create `src/pages/Dashboard.jsx`
-- [ ] Vertical flex column layout
-- [ ] Map through habits array
-- [ ] Render `HabitNode` for each habit
-- [ ] Implement zig-zag pattern:
+- [x] Create `src/pages/Dashboard.jsx`
+- [x] Vertical flex column layout
+- [x] Map through habits array
+- [x] Render `HabitNode` for each habit
+- [x] Implement zig-zag pattern:
   - Even items: `ml-auto mr-10`
   - Odd items: `mr-auto ml-10`
-- [ ] Add connecting path SVG between nodes (optional)
-- [ ] Use Framer Motion `staggerChildren` for sequential entrance animation
-- [ ] Add scroll animations (fade in on scroll)
+- [x] Add connecting path SVG between nodes (optional)
+- [x] Use Framer Motion `staggerChildren` for sequential entrance animation
+- [x] Add scroll animations (fade in on scroll)
 
 ### 3.3 Additional Pages (Placeholders)
-- [ ] Create `src/pages/Leaderboard.jsx` (placeholder)
-- [ ] Create `src/pages/Profile.jsx` (placeholder)
-- [ ] Create `src/pages/HabitDetail.jsx` (for editing habits)
+- [x] Create `src/pages/Leaderboard.jsx` (placeholder)
+- [x] Create `src/pages/Profile.jsx` (placeholder)
+- [x] Create `src/pages/HabitDetail.jsx` (for editing habits)
 
 ---
 

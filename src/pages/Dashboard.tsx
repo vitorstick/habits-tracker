@@ -1,10 +1,9 @@
 import React from 'react';
+import { motion, Variants } from 'framer-motion';
 import MobileLayout from '../layouts/MobileLayout';
 import HabitNode from '../components/habit/HabitNode';
 import { Habit } from '../types';
 import { Droplets, Dumbbell, BookOpen, Moon, Sun, Wind } from 'lucide-react';
-import ProgressRing from '../components/ui/ProgressRing';
-import StreakFlame from '../components/ui/StreakFlame';
 
 const Dashboard: React.FC = () => {
     // Mock habits with a winding path structure
@@ -26,27 +25,39 @@ const Dashboard: React.FC = () => {
         return "-translate-x-12";
     };
 
+    const containerVariants: Variants = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.15
+            }
+        }
+    };
+
+    const itemVariants: Variants = {
+        hidden: { opacity: 0, y: 50, scale: 0.8 },
+        show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 300, damping: 24 } }
+    };
+
     return (
         <MobileLayout>
-            {/* Sticky Header */}
-            <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b-2 border-brand-gray px-6 py-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    <ProgressRing progress={66} size={40} strokeWidth={4} />
-                    <div>
-                        <p className="text-[10px] font-black text-brand-gray-dark uppercase tracking-widest leading-none">Overall</p>
-                        <p className="text-sm font-extrabold text-brand-text">Level 4</p>
-                    </div>
-                </div>
-                <StreakFlame count={12} isActive={true} />
-            </header>
-
             {/* The Winding Path */}
-            <div className="py-12 flex flex-col items-center gap-16 relative">
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="show"
+                className="py-12 flex flex-col items-center gap-16 relative"
+            >
                 {/* SVG Path Background (Optional visual connecting line) */}
                 <div className="absolute top-0 bottom-0 w-2 bg-brand-gray/20 -z-10 rounded-full" />
 
                 {habits.map((habit, index) => (
-                    <div key={habit.id} className={`transition-transform duration-500 ${getOffsetClass(index)}`}>
+                    <motion.div
+                        key={habit.id}
+                        variants={itemVariants}
+                        className={`transition-transform duration-500 ${getOffsetClass(index)}`}
+                    >
                         <HabitNode
                             habit={habit}
                             onClick={(h) => console.log('Habit clicked:', h.title)}
@@ -57,17 +68,17 @@ const Dashboard: React.FC = () => {
                                 {habit.title}
                             </span>
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
 
                 {/* Achievement Cup at the end */}
-                <div className="mt-8 flex flex-col items-center opacity-30 grayscale saturate-0">
+                <motion.div variants={itemVariants} className="mt-8 flex flex-col items-center opacity-30 grayscale saturate-0">
                     <div className="w-24 h-24 rounded-full bg-brand-orange/20 flex items-center justify-center">
                         <span className="text-4xl">🏆</span>
                     </div>
                     <p className="mt-2 text-xs font-black text-brand-gray-dark uppercase tracking-widest">End of Week</p>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </MobileLayout>
     );
 };
