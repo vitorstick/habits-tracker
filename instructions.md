@@ -349,30 +349,20 @@
 **Objective:** Implement push notifications for habit reminders.
 
 ### 7.1 Push Notification Hook
-- [ ] Create `src/hooks/usePushNotifications.js`
-- [ ] Implement `requestPermission()` function
-- [ ] Implement `subscribeUser()` function:
-  ```js
-  const subscribeUser = async () => {
-    if ('serviceWorker' in navigator) {
-      const registration = await navigator.serviceWorker.ready;
-      const subscription = await registration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
-      });
-      // Send subscription to backend
-      await sendSubscriptionToBackend(subscription);
-    }
-  }
-  ```
-- [ ] Add VAPID keys configuration (will need backend)
+- [x] Create `src/hooks/useNotifications.ts`
+- [x] Implement `requestPermission()` function
+- [x] Implement `sendNotification()` function
+- [x] Handle permission states (granted, denied, default)
+- [x] Add VAPID keys configuration (will need backend)
 
-### 7.2 Notification UI
-- [ ] Add notification permission prompt in Profile page
-- [ ] Create notification settings UI
-- [ ] Allow users to set reminder times for each habit
+### 7.2 UI Integration
+- [x] Add "Enable Reminders" button to Profile settings
+- [x] Show permission status (Enabled/Disabled)
+- [x] Add "Test Notification" button for debugging
 
-**Note:** Full implementation requires backend support for sending push notifications.
+### 7.3 Scheduled Reminders (Local)
+- [x] Implement simple reminder logic (e.g., check last login)
+- [x] Trigger notification if user hasn't logged habit by 8 PM
 
 ---
 
