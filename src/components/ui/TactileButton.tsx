@@ -37,6 +37,13 @@ const TactileButton: React.FC<TactileButtonProps> = ({
         success: 'bg-brand-blue text-white',
     };
 
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        if (!disabled) {
+            if (navigator.vibrate) navigator.vibrate(10);
+            onClick?.(e);
+        }
+    };
+
     return (
         <div className={cn("relative inline-block min-w-[120px]", disabled && "opacity-50 cursor-not-allowed")}>
             {/* Shadow */}
@@ -51,7 +58,7 @@ const TactileButton: React.FC<TactileButtonProps> = ({
             <motion.button
                 whileTap={disabled ? {} : { y: 4 }}
                 transition={{ type: "spring", stiffness: 600, damping: 30 }}
-                onClick={onClick}
+                onClick={handleClick}
                 disabled={disabled}
                 className={cn(
                     "relative w-full rounded-2xl border-none outline-none cursor-pointer select-none",

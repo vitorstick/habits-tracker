@@ -36,7 +36,12 @@ const HabitNode: React.FC<HabitNodeProps> = ({ habit, onClick, className }) => {
                 isLocked ? "cursor-not-allowed" : "cursor-pointer",
                 className
             )}
-            onClick={() => !isLocked && onClick?.(habit)}
+            onClick={() => {
+                if (!isLocked) {
+                    if (navigator.vibrate) navigator.vibrate(15);
+                    onClick?.(habit);
+                }
+            }}
         >
             {/* Shadow */}
             <div

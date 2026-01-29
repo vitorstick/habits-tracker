@@ -22,6 +22,7 @@ const LogHabitModal: React.FC<LogHabitModalProps> = ({ isOpen, onClose, habit, o
     if (!habit) return null;
 
     const handleComplete = () => {
+        if (navigator.vibrate) navigator.vibrate(200);
         triggerConfetti();
         showToast('Habit completed! Well done!', 'success');
         onComplete(habit.id);

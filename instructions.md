@@ -378,19 +378,19 @@
 ### 8.2 Habit Completion Animation
 - [x] Confetti explosion on habit completion
 - [x] Success sound effect (optional)
-- [ ] Haptic feedback on mobile (Vibration API)
-- [ ] Streak milestone celebrations (special confetti at 7, 30, 100 days)
+- [x] Haptic feedback on mobile (Vibration API)
+- [x] Streak milestone celebrations (special confetti at 7, 30, 100 days)
 
 ### 8.3 Loading States
-- [ ] Create `src/components/ui/Skeleton.tsx` for loading states
-- [ ] Add shimmer effect
-- [ ] Use in Dashboard while habits are loading
+- [x] Create `src/components/ui/Skeleton.tsx` for loading states
+- [x] Add shimmer effect
+- [x] Use in Dashboard while habits are loading
 
 ### 8.4 Empty States
-- [ ] Create `src/components/ui/EmptyState.tsx`
-- [ ] Design for "No habits yet" state
-- [ ] Add illustration or icon
-- [ ] CTA button to create first habit
+- [x] Create `src/components/ui/EmptyState.tsx`
+- [x] Design for "No habits yet" state
+- [x] Add illustration or icon
+- [x] CTA button to create first habit
 
 ---
 
