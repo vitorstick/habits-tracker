@@ -197,26 +197,26 @@
 **Objective:** Build interactive modals for habit logging and feedback.
 
 ### 4.1 LogHabitModal Component
-- [ ] Create `src/components/modals/LogHabitModal.tsx`
-- [ ] Slide-up animation from bottom (Framer Motion)
-- [ ] Display habit details
-- [ ] Add "Complete" button with confetti effect
-- [ ] Add "Skip" option
-- [ ] Add notes input (optional)
-- [ ] Close on backdrop click or ESC key
+- [x] Create `src/components/modals/LogHabitModal.tsx`
+- [x] Slide-up animation from bottom (Framer Motion)
+- [x] Display habit details
+- [x] Add "Complete" button with confetti effect
+- [x] Add "Skip" option
+- [x] Add notes input (optional)
+- [x] Close on backdrop click or ESC key
 
 ### 4.2 Confetti Effect
-- [ ] Create `src/hooks/useConfetti.js`
-- [ ] Use `canvas-confetti` library
-- [ ] Trigger on habit completion
-- [ ] Customize colors to match brand palette
+- [x] Create `src/hooks/useConfetti.ts`
+- [x] Use `canvas-confetti` library
+- [x] Trigger on habit completion
+- [x] Customize colors to match brand palette
 
 ### 4.3 Toast Notifications
-- [ ] Create `src/components/ui/Toast.tsx`
-- [ ] Success, error, and info variants
-- [ ] Auto-dismiss after 3 seconds
-- [ ] Slide in from top
-- [ ] Use context for global toast management
+- [x] Create `src/components/ui/Toast.tsx`
+- [x] Success, error, and info variants
+- [x] Auto-dismiss after 3 seconds
+- [x] Slide in from top
+- [x] Use context for global toast management
 
 ---
 
@@ -225,7 +225,7 @@
 **Objective:** Set up React Query for data fetching and state management.
 
 ### 5.1 React Query Setup
-- [ ] Create `src/lib/queryClient.js`
+- [ ] Create `src/lib/queryClient.ts`
 - [ ] Configure QueryClient with default options:
   ```js
   {
@@ -262,13 +262,13 @@
   ```
 
 ### 5.3 Custom Hooks
-- [ ] Create `src/hooks/useHabits.js` - Fetch all habits
-- [ ] Create `src/hooks/useLogHabit.js` - Mutation for logging habits
-- [ ] Create `src/hooks/useStreakData.js` - Calculate streak information
-- [ ] Create `src/hooks/useMonthlyProgress.js` - Calculate monthly completion rate
+- [ ] Create `src/hooks/useHabits.ts` - Fetch all habits
+- [ ] Create `src/hooks/useLogHabit.ts` - Mutation for logging habits
+- [ ] Create `src/hooks/useStreakData.ts` - Calculate streak information
+- [ ] Create `src/hooks/useMonthlyProgress.ts` - Calculate monthly completion rate
 
 ### 5.4 Local Storage Persistence
-- [ ] Create `src/utils/storage.js` helper
+- [ ] Create `src/utils/storage.ts` helper
 - [ ] Implement `saveToLocalStorage()` and `loadFromLocalStorage()`
 - [ ] Sync React Query cache with localStorage
 - [ ] Handle data migration for schema changes
@@ -409,7 +409,7 @@
 **Objective:** Replace mock data with real API calls.
 
 ### 9.1 API Client Setup
-- [ ] Create `src/lib/apiClient.js` using `fetch` or `axios`
+- [ ] Create `src/lib/apiClient.ts` using `fetch`
 - [ ] Configure base URL from environment variables
 - [ ] Add request/response interceptors
 - [ ] Handle authentication tokens (if applicable)
@@ -440,7 +440,7 @@
 
 ### 10.1 Unit Testing Setup
 - [ ] Install Vitest: `npm install -D vitest @testing-library/react @testing-library/jest-dom`
-- [ ] Configure `vitest.config.js`
+- [ ] Configure `vitest.config.ts`
 - [ ] Write tests for utility functions
 - [ ] Write tests for custom hooks
 
