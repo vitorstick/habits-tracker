@@ -225,8 +225,8 @@
 **Objective:** Set up React Query for data fetching and state management.
 
 ### 5.1 React Query Setup
-- [ ] Create `src/lib/queryClient.ts`
-- [ ] Configure QueryClient with default options:
+- [x] Create `src/lib/queryClient.ts`
+- [x] Configure QueryClient with default options:
   ```js
   {
     defaultOptions: {
@@ -238,16 +238,16 @@
     },
   }
   ```
-- [ ] Wrap `App.tsx` in `QueryClientProvider`
+- [x] Wrap `App.tsx` in `QueryClientProvider`
 
 ### 5.2 Mock API Layer
-- [ ] Create `src/api/habits.js` with mock functions:
-  - [ ] `fetchHabits()` - Returns array of habit objects
-  - [ ] `fetchHabitById(id)` - Returns single habit
-  - [ ] `logHabit(id, date)` - Marks habit as complete
-  - [ ] `updateHabit(id, data)` - Updates habit details
-  - [ ] `deleteHabit(id)` - Removes habit
-- [ ] Mock data structure:
+- [x] Create `src/api/habits.ts` with mock functions:
+  - [x] `fetchHabits()` - Returns array of habit objects
+  - [x] `fetchHabitById(id)` - Returns single habit
+  - [x] `logHabit(id, date)` - Marks habit as complete
+  - [x] `updateHabit(id, data)` - Updates habit details
+  - [x] `deleteHabit(id)` - Removes habit
+- [x] Mock data structure:
   ```js
   {
     id: 1,
@@ -262,16 +262,16 @@
   ```
 
 ### 5.3 Custom Hooks
-- [ ] Create `src/hooks/useHabits.ts` - Fetch all habits
-- [ ] Create `src/hooks/useLogHabit.ts` - Mutation for logging habits
-- [ ] Create `src/hooks/useStreakData.ts` - Calculate streak information
-- [ ] Create `src/hooks/useMonthlyProgress.ts` - Calculate monthly completion rate
+- [x] Create `src/hooks/useHabits.ts` - Fetch all habits
+- [x] Create `src/hooks/useLogHabit.ts` - Mutation for logging habits
+- [x] Create `src/hooks/useStreakData.ts` - Calculate streak information
+- [x] Create `src/hooks/useMonthlyProgress.ts` - Calculate monthly completion rate
 
 ### 5.4 Local Storage Persistence
-- [ ] Create `src/utils/storage.ts` helper
-- [ ] Implement `saveToLocalStorage()` and `loadFromLocalStorage()`
-- [ ] Sync React Query cache with localStorage
-- [ ] Handle data migration for schema changes
+- [x] Create `src/utils/storage.ts` helper
+- [x] Implement `saveToLocalStorage()` and `loadFromLocalStorage()`
+- [x] Sync React Query cache with localStorage
+- [x] Handle data migration for schema changes
 
 ---
 

@@ -49,5 +49,27 @@ export const habitsApi = {
 
         storage.setItem(HABITS_STORAGE_KEY, updatedHabits);
         return updatedHabits;
+    },
+
+    updateHabit: async (id: string | number, data: Partial<Habit>): Promise<Habit[]> => {
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        const habits = storage.getItem<Habit[]>(HABITS_STORAGE_KEY) || INITIAL_HABITS;
+        const updatedHabits = habits.map(h =>
+            h.id === id ? { ...h, ...data } : h
+        );
+
+        storage.setItem(HABITS_STORAGE_KEY, updatedHabits);
+        return updatedHabits;
+    },
+
+    deleteHabit: async (id: string | number): Promise<Habit[]> => {
+        await new Promise(resolve => setTimeout(resolve, 300));
+
+        const habits = storage.getItem<Habit[]>(HABITS_STORAGE_KEY) || INITIAL_HABITS;
+        const updatedHabits = habits.filter(h => h.id !== id);
+
+        storage.setItem(HABITS_STORAGE_KEY, updatedHabits);
+        return updatedHabits;
     }
 };
