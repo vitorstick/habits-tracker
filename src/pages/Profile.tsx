@@ -3,12 +3,14 @@ import MobileLayout from '../layouts/MobileLayout';
 import { useStreakData } from '../hooks/useStreakData';
 import { useMonthlyProgress } from '../hooks/useMonthlyProgress';
 import { useHabits } from '../hooks/useHabits';
-import { Settings, Award, Zap } from 'lucide-react';
+import { useNotifications } from '../hooks/useNotifications';
+import { Settings, Award, Zap, Bell, BellOff } from 'lucide-react';
 
 const Profile: React.FC = () => {
     const { streak } = useStreakData();
     const { level } = useMonthlyProgress();
     const { data: habits = [] } = useHabits();
+    const { permission, requestPermission, sendTestNotification } = useNotifications();
 
     // Calculate total completions from all time
     const totalCompletions = habits.reduce((acc, habit) =>
@@ -79,6 +81,45 @@ const Profile: React.FC = () => {
                                 </div>
                             </div>
                         ))}
+                    </div>
+                </div>
+
+                {/* Settings Section */}
+                <div className="p-6">
+                    <h2 className="text-xl font-black text-brand-text mb-4">Settings</h2>
+                    <div className="bg-white rounded-2xl border-2 border-brand-gray overflow-hidden">
+                        <div className="p-4 flex items-center justify-between border-b-2 border-brand-gray-light">
+                            <div className="flex items-center gap-3">
+                                <div className={`p-2 rounded-xl ${permission === 'granted' ? 'bg-brand-green/10 text-brand-green' : 'bg-brand-gray-light text-brand-gray-dark'}`}>
+                                    {permission === 'granted' ? <Bell size={24} /> : <BellOff size={24} />}
+                                </div>
+                                <div>
+                                    <p className="font-bold text-brand-text">Daily Reminders</p>
+                                    <p className="text-xs text-brand-gray-dark">
+                                        {permission === 'granted' ? 'Notifications active' : 'Enable to keep your streak'}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {permission !== 'granted' ? (
+                                <button
+                                    onClick={requestPermission}
+                                    className="px-4 py-2 bg-brand-blue text-white font-bold rounded-xl text-sm active:scale-95 transition-transform"
+                                >
+                                    Enable
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={sendTestNotification}
+                                    className="px-4 py-2 bg-brand-gray-light text-brand-text font-bold rounded-xl text-sm active:scale-95 transition-transform"
+                                >
+                                    Test
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                    <div className="mt-4 text-center">
+                        <p className="text-xs font-bold text-brand-gray-dark">Version 0.1.0 • PWA Ready</p>
                     </div>
                 </div>
             </div>
