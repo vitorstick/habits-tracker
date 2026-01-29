@@ -1,20 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, Variants } from 'framer-motion';
 import MobileLayout from '../layouts/MobileLayout';
 import HabitNode from '../components/habit/HabitNode';
+import LogHabitModal from '../components/modals/LogHabitModal';
 import { Habit } from '../types';
 import { Droplets, Dumbbell, BookOpen, Moon, Sun, Wind } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
     // Mock habits with a winding path structure
-    const habits: Habit[] = [
+    const [habits, setHabits] = useState<Habit[]>([
         { id: 1, title: 'Morning Water', icon: <Droplets size={32} />, status: 'completed' },
         { id: 2, title: 'Read 10 Pages', icon: <BookOpen size={32} />, status: 'completed' },
         { id: 3, title: 'Meditation', icon: <Wind size={32} />, status: 'pending' },
         { id: 4, title: 'Exercise', icon: <Dumbbell size={32} />, status: 'pending' },
         { id: 5, title: 'Journaling', icon: <Sun size={32} />, status: 'locked' },
         { id: 6, title: 'Sleep Well', icon: <Moon size={32} />, status: 'locked' },
-    ];
+    ]);
+
+    const [selectedHabit, setSelectedHabit] = useState<Habit | null>(null);
+
+    const handleHabitClick = (habit: Habit) => {
+        setSelectedHabit(habit);
+    };
+
+    const handleCompleteHabit = (id: string | number) => {
+        setHabits(prev => prev.map(h =>
+            h.id === id ? { ...h, status: 'completed' } : h
+        ));
+    };
 
     // Offsets for the zigzag path
     const getOffsetClass = (index: number) => {
@@ -60,7 +73,7 @@ const Dashboard: React.FC = () => {
                     >
                         <HabitNode
                             habit={habit}
-                            onClick={(h) => console.log('Habit clicked:', h.title)}
+                            onClick={handleHabitClick}
                         />
                         <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-max">
                             <span className={`text-[10px] font-black uppercase tracking-wider ${habit.status === 'locked' ? 'text-brand-gray-dark/50' : 'text-brand-text'
@@ -79,6 +92,13 @@ const Dashboard: React.FC = () => {
                     <p className="mt-2 text-xs font-black text-brand-gray-dark uppercase tracking-widest">End of Week</p>
                 </motion.div>
             </motion.div>
+
+            <LogHabitModal
+                isOpen={!!selectedHabit}
+                onClose={() => setSelectedHabit(null)}
+                habit={selectedHabit}
+                onComplete={handleCompleteHabit}
+            />
         </MobileLayout>
     );
 };

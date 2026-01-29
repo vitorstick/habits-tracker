@@ -27,7 +27,7 @@
   npm install -D typescript @types/react @types/react-dom @types/node
   ```
 - [x] Create TypeScript config files (tsconfig.json, tsconfig.app.json, tsconfig.node.json)
-- [x] Convert files to TypeScript (.jsx → .tsx, .js → .ts)
+- [x] Convert files to TypeScript (.tsx → .tsx, .js → .ts)
 - [x] Create `src/vite-env.d.ts` for asset type declarations
 
 ### 1.2 Tailwind Configuration
@@ -117,7 +117,7 @@
 **Objective:** Build reusable, animated components with a 3D tactile feel.
 
 ### 2.1 TactileButton Component
-- [x] Create `src/components/ui/TactileButton.jsx`
+- [x] Create `src/components/ui/TactileButton.tsx`
 - [x] Implement 3D button with shadow that "sinks" on press
 - [x] Add variants: `primary` (green), `secondary` (gray), `danger` (red), `success` (blue)
 - [x] Props: `variant`, `onClick`, `children`, `disabled`, `className`, `size` (sm, md, lg)
@@ -130,7 +130,7 @@
 - Add `active:` state for non-JS fallback
 
 ### 2.2 HabitNode Component
-- [x] Create `src/components/habit/HabitNode.jsx` (Converted to .tsx)
+- [x] Create `src/components/habit/HabitNode.tsx` (Converted to .tsx)
 - [x] Fixed size: `w-20 h-20` (80px) circular button
 - [x] Implement three states:
   - [x] **Completed:** Green background, checkmark icon (Lucide `Check`)
@@ -160,7 +160,7 @@
 **Objective:** Create the mobile-first layout structure and navigation.
 
 ### 3.1 MobileLayout Component
-- [x] Create `src/layouts/MobileLayout.jsx`
+- [x] Create `src/layouts/MobileLayout.tsx`
 - [x] Container: `max-w-md mx-auto min-h-screen bg-white relative`
 - [x] Implement fixed top bar:
   - [x] Left: App logo/title
@@ -174,7 +174,7 @@
 - [x] Main content area with `pb-20 pt-16` for fixed nav spacing
 
 ### 3.2 Dashboard Page - "The Path"
-- [x] Create `src/pages/Dashboard.jsx`
+- [x] Create `src/pages/Dashboard.tsx`
 - [x] Vertical flex column layout
 - [x] Map through habits array
 - [x] Render `HabitNode` for each habit
@@ -186,9 +186,9 @@
 - [x] Add scroll animations (fade in on scroll)
 
 ### 3.3 Additional Pages (Placeholders)
-- [x] Create `src/pages/Leaderboard.jsx` (placeholder)
-- [x] Create `src/pages/Profile.jsx` (placeholder)
-- [x] Create `src/pages/HabitDetail.jsx` (for editing habits)
+- [x] Create `src/pages/Leaderboard.tsx` (placeholder)
+- [x] Create `src/pages/Profile.tsx` (placeholder)
+- [x] Create `src/pages/HabitDetail.tsx` (for editing habits)
 
 ---
 
@@ -197,7 +197,7 @@
 **Objective:** Build interactive modals for habit logging and feedback.
 
 ### 4.1 LogHabitModal Component
-- [ ] Create `src/components/modals/LogHabitModal.jsx`
+- [ ] Create `src/components/modals/LogHabitModal.tsx`
 - [ ] Slide-up animation from bottom (Framer Motion)
 - [ ] Display habit details
 - [ ] Add "Complete" button with confetti effect
@@ -212,7 +212,7 @@
 - [ ] Customize colors to match brand palette
 
 ### 4.3 Toast Notifications
-- [ ] Create `src/components/ui/Toast.jsx`
+- [ ] Create `src/components/ui/Toast.tsx`
 - [ ] Success, error, and info variants
 - [ ] Auto-dismiss after 3 seconds
 - [ ] Slide in from top
@@ -238,7 +238,7 @@
     },
   }
   ```
-- [ ] Wrap `App.jsx` in `QueryClientProvider`
+- [ ] Wrap `App.tsx` in `QueryClientProvider`
 
 ### 5.2 Mock API Layer
 - [ ] Create `src/api/habits.js` with mock functions:
@@ -392,12 +392,12 @@
 - [ ] Streak milestone celebrations (special confetti at 7, 30, 100 days)
 
 ### 8.3 Loading States
-- [ ] Create `src/components/ui/Skeleton.jsx` for loading states
+- [ ] Create `src/components/ui/Skeleton.tsx` for loading states
 - [ ] Add shimmer effect
 - [ ] Use in Dashboard while habits are loading
 
 ### 8.4 Empty States
-- [ ] Create `src/components/ui/EmptyState.jsx`
+- [ ] Create `src/components/ui/EmptyState.tsx`
 - [ ] Design for "No habits yet" state
 - [ ] Add illustration or icon
 - [ ] CTA button to create first habit
