@@ -1,19 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, Lock, Play } from 'lucide-react';
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-
-function cn(...inputs: ClassValue[]) {
-    return twMerge(clsx(inputs));
-}
-
-export interface Habit {
-    id: string | number;
-    title: string;
-    icon?: React.ReactNode;
-    status: 'pending' | 'completed' | 'locked';
-}
+import { cn } from '../../lib/utils';
+import { Habit } from '../../types';
 
 interface HabitNodeProps {
     habit: Habit;

@@ -1,18 +1,11 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { motion, HTMLMotionProps } from 'framer-motion';
+import { cn } from '../../lib/utils';
 
-/**
- * Utility function to merge tailwind classes
- */
-function cn(...inputs: ClassValue[]) {
-    return twMerge(clsx(inputs));
-}
-
-interface TactileButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface TactileButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {
     variant?: 'primary' | 'secondary' | 'danger' | 'success';
     size?: 'sm' | 'md' | 'lg';
+    children: React.ReactNode;
 }
 
 const TactileButton: React.FC<TactileButtonProps> = ({
@@ -20,6 +13,8 @@ const TactileButton: React.FC<TactileButtonProps> = ({
     size = 'md',
     className,
     children,
+    disabled,
+    onClick,
     ...props
 }) => {
     const sizeClasses = {
@@ -42,9 +37,6 @@ const TactileButton: React.FC<TactileButtonProps> = ({
         success: 'bg-brand-blue text-white',
     };
 
-    // Separate motion props from HTML button props to avoid type conflicts
-    const { onClick, disabled, type, ...rest } = props;
-
     return (
         <div className={cn("relative inline-block min-w-[120px]", disabled && "opacity-50 cursor-not-allowed")}>
             {/* Shadow */}
@@ -61,14 +53,13 @@ const TactileButton: React.FC<TactileButtonProps> = ({
                 transition={{ type: "spring", stiffness: 600, damping: 30 }}
                 onClick={onClick}
                 disabled={disabled}
-                type={type}
                 className={cn(
                     "relative w-full rounded-2xl border-none outline-none cursor-pointer select-none",
                     sizeClasses[size],
                     faceColors[variant],
                     className
                 )}
-                {...rest as any}
+                {...props}
             >
                 {children}
             </motion.button>
