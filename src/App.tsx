@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import { queryClient } from './lib/queryClient';
 import { ToastProvider } from './context/ToastContext';
 import Dashboard from './pages/Dashboard';
+import { CreateHabit } from './pages/CreateHabit';
 import Leaderboard from './pages/Leaderboard';
 import Profile from './pages/Profile';
 import Stats from './pages/Stats';
@@ -15,6 +16,7 @@ const AnimatedRoutes = () => {
         <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<Dashboard />} />
+                <Route path="/create" element={<CreateHabit />} />
                 <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/stats" element={<Stats />} />

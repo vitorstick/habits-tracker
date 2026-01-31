@@ -1,17 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Lock, Play } from 'lucide-react';
+import { Check, Lock } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Habit } from '../../types';
+import { HabitIcon } from './HabitIcon';
 
 interface HabitNodeProps {
     habit: Habit;
     onClick?: (habit: Habit) => void;
     className?: string;
+    isCompleted?: boolean;
 }
 
-const HabitNode: React.FC<HabitNodeProps> = ({ habit, onClick, className }) => {
-    const isCompleted = habit.status === 'completed';
+const HabitNode: React.FC<HabitNodeProps> = ({ habit, onClick, className, isCompleted: isCompletedProp }) => {
+    const isCompleted = isCompletedProp ?? (habit.status === 'completed');
     const isLocked = habit.status === 'locked';
     const isPending = habit.status === 'pending';
 
@@ -57,7 +59,7 @@ const HabitNode: React.FC<HabitNodeProps> = ({ habit, onClick, className }) => {
                 whileTap={!isLocked ? { scale: 0.95, y: 4 } : {}}
                 transition={{ type: "spring", stiffness: 600, damping: 30 }}
                 className={cn(
-                    "relative w-full h-full rounded-full flex items-center justify-center transition-colors",
+                    "relative w-full h-full rounded-full flex items-center justify-center transition-colors px-1",
                     faceColors[status]
                 )}
             >
@@ -66,7 +68,7 @@ const HabitNode: React.FC<HabitNodeProps> = ({ habit, onClick, className }) => {
                 ) : isCompleted ? (
                     <Check size={40} strokeWidth={3} />
                 ) : (
-                    habit.icon || <Play size={32} fill="currentColor" />
+                    <HabitIcon name={habit.icon} size={32} strokeWidth={2.5} />
                 )}
             </motion.div>
 

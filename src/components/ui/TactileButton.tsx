@@ -5,12 +5,14 @@ import { cn } from '../../lib/utils';
 interface TactileButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {
     variant?: 'primary' | 'secondary' | 'danger' | 'success';
     size?: 'sm' | 'md' | 'lg';
+    type?: 'button' | 'submit' | 'reset';
     children: React.ReactNode;
 }
 
 const TactileButton: React.FC<TactileButtonProps> = ({
     variant = 'primary',
     size = 'md',
+    type = 'button',
     className,
     children,
     disabled,
@@ -60,6 +62,7 @@ const TactileButton: React.FC<TactileButtonProps> = ({
                 transition={{ type: "spring", stiffness: 600, damping: 30 }}
                 onClick={handleClick}
                 disabled={disabled}
+                type={type}
                 className={cn(
                     "relative w-full rounded-2xl border-none outline-none cursor-pointer select-none",
                     sizeClasses[size],

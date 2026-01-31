@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check } from 'lucide-react';
 import TactileButton from '../ui/TactileButton';
 import { Habit } from '../../types';
-import { cn } from '../../lib/utils';
 import { useConfetti } from '../../hooks/useConfetti';
 import { useToast } from '../../context/ToastContext';
+import { HabitIcon } from '../habit/HabitIcon';
 
 interface LogHabitModalProps {
     isOpen: boolean;
@@ -59,11 +59,11 @@ const LogHabitModal: React.FC<LogHabitModalProps> = ({ isOpen, onClose, habit, o
                             {/* Header */}
                             <div className="flex items-center justify-between mb-8">
                                 <div className="flex items-center gap-4">
-                                    <div className={cn(
-                                        "w-12 h-12 rounded-2xl flex items-center justify-center text-white",
-                                        "bg-brand-blue" // Dynamic color could go here
-                                    )}>
-                                        {habit.icon}
+                                    <div
+                                        className="w-12 h-12 rounded-2xl flex items-center justify-center text-white"
+                                        style={{ backgroundColor: habit.color }}
+                                    >
+                                        <HabitIcon name={habit.icon} size={28} />
                                     </div>
                                     <div>
                                         <h2 className="text-xl font-black text-brand-text">{habit.title}</h2>

@@ -394,37 +394,36 @@
 
 ---
 
-## Phase 9: Backend Integration
+## Phase 9: New Habit Creation
 
-**Objective:** Replace mock data with real API calls.
+**Objective:** Implement a dedicated page for creating and configuring new habits.
 
-### 9.1 API Client Setup
-- [ ] Create `src/lib/apiClient.ts` using `fetch`
-- [ ] Configure base URL from environment variables
-- [ ] Add request/response interceptors
-- [ ] Handle authentication tokens (if applicable)
+### 9.1 Create Habit Page
+- [x] Create `src/pages/CreateHabit.tsx`
+- [x] Implement form with standard tactile styling:
+  - **Name:** Text input
+  - **Description:** Textarea
+  - **Color Picker:** Selection of brand colors
+  - **Icon Picker:** Grid/Dropdown of Lucide icons
+- [x] Implement Frequency Logic:
+  - **Daily:** Standard 
+  - **Weekly:** Select day(s) of the week
+  - **Monthly:** Select day of the month
+- [x] Add "Create" button with success animation/sound
 
-### 9.2 Environment Configuration
-- [ ] Create `.env.local` file
-- [ ] Add `VITE_API_BASE_URL` variable
-- [ ] Add `VITE_VAPID_PUBLIC_KEY` for push notifications
-- [ ] Document required environment variables in README
+### 9.2 Components & Hooks
+- [x] Create `src/components/habit/IconPicker.tsx`
+- [x] Create `src/components/habit/FrequencySelector.tsx`
+- [x] Update `Habit` type in `src/types.ts` to include metadata
+- [x] Update `useHabits` and mock API to persist new habits
 
-### 9.3 Update API Functions
-- [ ] Update `src/api/habits.ts` to use real endpoints
-- [ ] Replace mock data with actual API calls
-- [ ] Handle error responses
-- [ ] Add retry logic for failed requests
-
-### 9.4 Authentication (if required)
-- [ ] Implement login/signup flow
-- [ ] Store JWT tokens securely
-- [ ] Add token refresh logic
-- [ ] Protect routes that require authentication
+### 9.3 Navigation UI
+- [x] Add "Add Habit" floating button or list item to Dashboard
+- [x] Add route to `App.tsx`
 
 ---
 
-## Phase 10: Deployment
+## Phase 10: Deployment (Completed)
 
 **Objective:** Deploy the application to production.
 
@@ -448,30 +447,60 @@
 
 ---
 
-## Phase 11: Testing & Quality Assurance
+## Phase 11: Backend Integration
+
+**Objective:** Replace mock data with real API calls.
+
+### 11.1 API Client Setup
+- [ ] Create `src/lib/apiClient.ts` using `fetch`
+- [ ] Configure base URL from environment variables
+- [ ] Add request/response interceptors
+- [ ] Handle authentication tokens (if applicable)
+
+### 11.2 Environment Configuration
+- [ ] Create `.env.local` file
+- [ ] Add `VITE_API_BASE_URL` variable
+- [ ] Add `VITE_VAPID_PUBLIC_KEY` for push notifications
+- [ ] Document required environment variables in README
+
+### 11.3 Update API Functions
+- [ ] Update `src/api/habits.ts` to use real endpoints
+- [ ] Replace mock data with actual API calls
+- [ ] Handle error responses
+- [ ] Add retry logic for failed requests
+
+### 11.4 Authentication (if required)
+- [ ] Implement login/signup flow
+- [ ] Store JWT tokens securely
+- [ ] Add token refresh logic
+- [ ] Protect routes that require authentication
+
+---
+
+## Phase 12: Testing & Quality Assurance
 
 **Objective:** Ensure app reliability and performance.
 
-### 11.1 Unit Testing Setup
+### 12.1 Unit Testing Setup
 - [ ] Install Vitest: `npm install -D vitest @testing-library/react @testing-library/jest-dom`
 - [ ] Configure `vitest.config.ts`
 - [ ] Write tests for utility functions
 - [ ] Write tests for custom hooks
 
-### 11.2 Component Testing
+### 12.2 Component Testing
 - [ ] Test `TactileButton` component
 - [ ] Test `HabitNode` component
 - [ ] Test `ProgressRing` component
 
 
-### 11.3 Performance Optimization
+### 12.3 Performance Optimization
 - [ ] Run Lighthouse audit
 - [ ] Optimize bundle size (code splitting)
 - [ ] Lazy load routes with `React.lazy()`
 - [ ] Optimize images (use WebP format)
 - [ ] Add performance monitoring (Web Vitals)
 
-### 11.4 Monitoring
+### 12.4 Monitoring
 - [ ] Set up error tracking (Sentry, LogRocket)
 - [ ] Set up analytics (Google Analytics, Plausible)
 - [ ] Monitor Core Web Vitals
