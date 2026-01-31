@@ -429,20 +429,22 @@
 **Objective:** Deploy the application to production.
 
 ### 10.1 Build Configuration
-- [ ] Test production build: `npm run build`
-- [ ] Verify build output in `dist/` folder
-- [ ] Test production build locally: `npm run preview`
+- [x] Test production build: `npm run build`
+- [x] Verify build output in `dist/` folder
+- [x] Test production build locally: `npx serve dist` (or `npm run preview`)
 
-### 10.2 Hosting Setup
-- [ ] Choose hosting platform (Vercel, Netlify, Cloudflare Pages)
-- [ ] Connect GitHub repository
-- [ ] Configure build settings
-- [ ] Set environment variables in hosting platform
+### 10.2 Hosting Setup (Cloudflare Pages)
+- [x] Connect GitHub repository: `vitorstick/habits-tracker`
+- [x] Configure build settings:
+  - **Framework Preset:** `Vite`
+  - **Build Command:** `npm run build`
+  - **Build Output Directory:** `dist`
+- [x] Deploy to Cloudflare Pages: [https://habits-tracker-50w.pages.dev/](https://habits-tracker-50w.pages.dev/)
 
 ### 10.3 Domain & SSL
-- [ ] Configure custom domain (optional)
-- [ ] Ensure HTTPS is enabled
-- [ ] Test PWA installation on mobile device
+- [x] Ensure HTTPS is enabled (Automatic by Cloudflare)
+- [x] Test PWA installation on mobile device
+- [ ] Configure custom domain (Optional)
 
 ---
 
