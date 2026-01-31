@@ -11,7 +11,7 @@ interface LogHabitModalProps {
     isOpen: boolean;
     onClose: () => void;
     habit: Habit | null;
-    onComplete: (habitId: string | number) => void;
+    onComplete: (habitId: number) => void;
 }
 
 const LogHabitModal: React.FC<LogHabitModalProps> = ({ isOpen, onClose, habit, onComplete }) => {

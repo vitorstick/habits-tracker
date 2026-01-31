@@ -1,7 +1,7 @@
 export type HabitFrequency = 'daily' | 'weekly' | 'monthly';
 
 export interface Habit {
-    id: string | number;
+    id: number;
     title: string;
     description?: string;
     icon: string; // Lucide icon name

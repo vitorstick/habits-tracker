@@ -20,7 +20,7 @@ const Dashboard: React.FC = () => {
         setSelectedHabit(habit);
     };
 
-    const handleCompleteHabit = (id: string | number) => {
+    const handleCompleteHabit = (id: number) => {
         logHabit(id);
     };
 
