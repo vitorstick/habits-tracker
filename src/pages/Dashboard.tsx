@@ -5,19 +5,44 @@ import MobileLayout from '../layouts/MobileLayout';
 import HabitNode from '../components/habit/HabitNode';
 import LogHabitModal from '../components/modals/LogHabitModal';
 import { Habit } from '../types';
-import { Plus } from 'lucide-react';
+import { Plus, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useHabits } from '../hooks/useHabits';
 import { useLogHabit } from '../hooks/useLogHabit';
 import PageTransition from '../components/ui/PageTransition';
 import ErrorState from '../components/ui/ErrorState';
+import { getRelativeDateString, formatDateToKey } from '../utils/dateUtils';
 
 const Dashboard: React.FC = () => {
     const navigate = useNavigate();
-    const { data: habits = [], isLoading, isError, refetch } = useHabits();
+    const [selectedDate, setSelectedDate] = useState(formatDateToKey(new Date()));
+    const { data: rawHabits = [], isLoading, isError, refetch } = useHabits(selectedDate);
     const { mutate: logHabit } = useLogHabit();
     const [selectedHabit, setSelectedHabit] = useState<Habit | null>(null);
 
+    const todayStr = formatDateToKey(new Date());
+    const isPast = selectedDate < todayStr;
+    const isFuture = selectedDate > todayStr;
+
+    // Filter logic: if it's a past date, only show unfinished habits
+    const habits = isPast
+        ? rawHabits.filter(h => h.status !== 'completed')
+        : rawHabits;
+
+    const handleDateChange = (offset: number) => {
+        const currentDate = new Date(selectedDate);
+        currentDate.setDate(currentDate.getDate() + offset);
+        setSelectedDate(formatDateToKey(currentDate));
+    };
+
+    const getDateLabel = () => {
+        if (selectedDate === todayStr) return "Today";
+        if (selectedDate === getRelativeDateString(-1)) return "Yesterday";
+        if (selectedDate === getRelativeDateString(1)) return "Tomorrow";
+        return selectedDate;
+    };
+
     const handleHabitClick = (habit: Habit) => {
+        if (isFuture) return; // Can't log habits in the future
         setSelectedHabit(habit);
     };
 
@@ -69,7 +94,36 @@ const Dashboard: React.FC = () => {
     return (
         <PageTransition>
             <MobileLayout>
+                {/* Date Selector */}
+                <div className="flex items-center justify-between px-6 pt-6 -mb-4">
+                    <button
+                        onClick={() => handleDateChange(-1)}
+                        className="p-2 rounded-full hover:bg-brand-gray/20 transition-colors"
+                    >
+                        <ChevronLeft className="text-brand-gray-dark" />
+                    </button>
+
+                    <div className="flex flex-col items-center">
+                        <span className="text-xl font-black text-brand-text uppercase tracking-tight">
+                            {getDateLabel()}
+                        </span>
+                        {selectedDate !== todayStr && (
+                            <span className="text-[10px] font-bold text-brand-gray-dark/60 uppercase tracking-widest">
+                                {selectedDate}
+                            </span>
+                        )}
+                    </div>
+
+                    <button
+                        onClick={() => handleDateChange(1)}
+                        className="p-2 rounded-full hover:bg-brand-gray/20 transition-colors"
+                    >
+                        <ChevronRight className="text-brand-gray-dark" />
+                    </button>
+                </div>
+
                 <motion.div
+                    key={selectedDate} // Ensure animation re-runs on date change
                     variants={containerVariants}
                     initial="hidden"
                     animate="show"

@@ -2,8 +2,9 @@ import { Habit } from '../types';
 import { apiClient } from '../lib/apiClient';
 
 export const habitsApi = {
-    fetchHabits: async (): Promise<Habit[]> => {
-        return apiClient.get<Habit[]>('/habits');
+    fetchHabits: async (date?: string): Promise<Habit[]> => {
+        const query = date ? `?date=${date}` : '';
+        return apiClient.get<Habit[]>(`/habits${query}`);
     },
 
     createHabit: async (habitData: Omit<Habit, 'id' | 'status' | 'completedDates' | 'streak'>): Promise<Habit> => {
