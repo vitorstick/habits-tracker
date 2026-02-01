@@ -9,10 +9,11 @@ import { Plus } from 'lucide-react';
 import { useHabits } from '../hooks/useHabits';
 import { useLogHabit } from '../hooks/useLogHabit';
 import PageTransition from '../components/ui/PageTransition';
+import ErrorState from '../components/ui/ErrorState';
 
 const Dashboard: React.FC = () => {
     const navigate = useNavigate();
-    const { data: habits = [], isLoading } = useHabits();
+    const { data: habits = [], isLoading, isError, refetch } = useHabits();
     const { mutate: logHabit } = useLogHabit();
     const [selectedHabit, setSelectedHabit] = useState<Habit | null>(null);
 
@@ -53,6 +54,14 @@ const Dashboard: React.FC = () => {
                 <div className="flex items-center justify-center min-h-[50vh]">
                     <div className="w-8 h-8 border-4 border-brand-blue border-t-transparent rounded-full animate-spin" />
                 </div>
+            </MobileLayout>
+        );
+    }
+
+    if (isError) {
+        return (
+            <MobileLayout>
+                <ErrorState onRetry={() => refetch()} />
             </MobileLayout>
         );
     }
