@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '../layouts/MobileLayout';
 import HabitNode from '../components/habit/HabitNode';
@@ -50,13 +50,7 @@ const Dashboard: React.FC = () => {
         logHabit(id);
     };
 
-    const getOffsetClass = (index: number) => {
-        const cycle = index % 4;
-        if (cycle === 0) return "translate-x-0";
-        if (cycle === 1) return "translate-x-12";
-        if (cycle === 2) return "translate-x-0";
-        return "-translate-x-12";
-    };
+
 
     const containerVariants: Variants = {
         hidden: { opacity: 0 },
@@ -70,7 +64,16 @@ const Dashboard: React.FC = () => {
 
     const itemVariants: Variants = {
         hidden: { opacity: 0, y: 50, scale: 0.8 },
-        show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 300, damping: 24 } }
+        show: {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            transition: {
+                type: "spring",
+                stiffness: 300,
+                damping: 24
+            }
+        }
     };
 
     if (isLoading) {
@@ -131,25 +134,37 @@ const Dashboard: React.FC = () => {
                 >
                     <div className="absolute top-0 bottom-0 w-2 bg-brand-gray/20 -z-10 rounded-full" />
 
-                    {habits.map((habit, index) => (
-                        <motion.div
-                            key={habit.id}
-                            variants={itemVariants}
-                            className={`transition-transform duration-500 ${getOffsetClass(index)}`}
-                        >
-                            <HabitNode
-                                habit={habit}
-                                onClick={handleHabitClick}
-                                isCompleted={habit.status === 'completed'}
-                            />
-                            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-max">
-                                <span className={`text-[10px] font-black uppercase tracking-wider ${habit.status === 'locked' ? 'text-brand-gray-dark/50' : 'text-brand-text'
-                                    }`}>
-                                    {habit.title}
-                                </span>
-                            </div>
-                        </motion.div>
-                    ))}
+                    <AnimatePresence mode="popLayout">
+                        {habits.map((habit, index) => {
+                            const cycle = index % 4;
+                            const xOffset = cycle === 1 ? 48 : cycle === 3 ? -48 : 0;
+
+                            return (
+                                <motion.div
+                                    key={habit.id}
+                                    layout
+                                    variants={itemVariants}
+                                    initial="hidden"
+                                    animate="show"
+                                    exit={{ opacity: 0, scale: 0.5 }}
+                                    style={{ x: xOffset }}
+                                    className="relative"
+                                >
+                                    <HabitNode
+                                        habit={habit}
+                                        onClick={handleHabitClick}
+                                        isCompleted={habit.status === 'completed'}
+                                    />
+                                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-max">
+                                        <span className={`text-[10px] font-black uppercase tracking-wider ${habit.status === 'locked' ? 'text-brand-gray-dark/50' : 'text-brand-text'
+                                            }`}>
+                                            {habit.title}
+                                        </span>
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </AnimatePresence>
 
                     <motion.div variants={itemVariants} className="mt-8 flex flex-col items-center opacity-30 grayscale saturate-0">
                         <div className="w-24 h-24 rounded-full bg-brand-orange/20 flex items-center justify-center">

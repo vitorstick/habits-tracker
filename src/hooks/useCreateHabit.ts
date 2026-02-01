@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { habitsApi } from '../api/habits';
 
-export const useLogHabit = () => {
+export const useCreateHabit = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: habitsApi.logHabit,
+        mutationFn: habitsApi.createHabit,
         onSuccess: () => {
-            // Invalidate all habit queries to ensure dashboard and stats are in sync
+            // Invalidate all habit-related queries to ensure all views refresh
             queryClient.invalidateQueries({ queryKey: ['habits'] });
         },
     });

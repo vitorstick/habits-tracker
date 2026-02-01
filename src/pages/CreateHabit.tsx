@@ -5,10 +5,10 @@ import TactileButton from '../components/ui/TactileButton';
 import { IconPicker } from '../components/habit/IconPicker';
 import { ColorPicker } from '../components/habit/ColorPicker';
 import { FrequencySelector } from '../components/habit/FrequencySelector';
-import { habitsApi } from '../api/habits';
 import { HabitFrequency } from '../types';
 import { useToast } from '../context/ToastContext';
 import { useConfetti } from '../hooks/useConfetti';
+import { useCreateHabit } from '../hooks/useCreateHabit';
 
 export const CreateHabit: React.FC = () => {
     const navigate = useNavigate();
@@ -19,16 +19,15 @@ export const CreateHabit: React.FC = () => {
     const [color, setColor] = useState('#58CC02');
     const [frequency, setFrequency] = useState<HabitFrequency>('daily');
     const [details, setDetails] = useState<{ daysOfWeek?: number[]; dayOfMonth?: number }>({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const { triggerConfetti } = useConfetti();
+    const { mutateAsync: createHabit, isPending: isSubmitting } = useCreateHabit();
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
         if (!title.trim()) return;
 
-        setIsSubmitting(true);
         try {
-            await habitsApi.createHabit({
+            await createHabit({
                 title,
                 description,
                 icon,
@@ -41,8 +40,6 @@ export const CreateHabit: React.FC = () => {
             setTimeout(() => navigate('/'), 1500);
         } catch (error) {
             console.error('Failed to create habit:', error);
-        } finally {
-            setIsSubmitting(false);
         }
     };
 
