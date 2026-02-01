@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Check } from 'lucide-react';
+import { X, Check, Trash2, AlertTriangle } from 'lucide-react';
 import TactileButton from '../ui/TactileButton';
 import { Habit } from '../../types';
 import { useConfetti } from '../../hooks/useConfetti';
 import { useToast } from '../../context/ToastContext';
 import { HabitIcon } from '../habit/HabitIcon';
+import { useDeleteHabit } from '../../hooks/useDeleteHabit';
+import { cn } from '../../lib/utils';
 
 interface LogHabitModalProps {
     isOpen: boolean;
@@ -16,8 +18,10 @@ interface LogHabitModalProps {
 
 const LogHabitModal: React.FC<LogHabitModalProps> = ({ isOpen, onClose, habit, onComplete }) => {
     const [note, setNote] = useState('');
+    const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
     const { triggerConfetti } = useConfetti();
     const { showToast } = useToast();
+    const { mutate: deleteHabit, isPending: isDeleting } = useDeleteHabit();
 
     if (!habit) return null;
 
@@ -34,6 +38,30 @@ const LogHabitModal: React.FC<LogHabitModalProps> = ({ isOpen, onClose, habit, o
         onClose();
     };
 
+    const handleDelete = () => {
+        if (!isConfirmingDelete) {
+            setIsConfirmingDelete(true);
+            return;
+        }
+
+        deleteHabit(habit.id, {
+            onSuccess: () => {
+                showToast('Habit deleted successfully', 'success');
+                onClose();
+            },
+            onError: () => {
+                showToast('Failed to delete habit', 'error');
+                setIsConfirmingDelete(false);
+            }
+        });
+    };
+
+    const handleModalClose = () => {
+        setIsConfirmingDelete(false);
+        setNote('');
+        onClose();
+    };
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -43,7 +71,7 @@ const LogHabitModal: React.FC<LogHabitModalProps> = ({ isOpen, onClose, habit, o
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        onClick={onClose}
+                        onClick={handleModalClose}
                         className="fixed inset-0 bg-black/60 z-50 backdrop-blur-sm"
                     />
 
@@ -70,13 +98,41 @@ const LogHabitModal: React.FC<LogHabitModalProps> = ({ isOpen, onClose, habit, o
                                         <p className="text-brand-gray-dark font-bold text-sm">Daily Goal</p>
                                     </div>
                                 </div>
-                                <button
-                                    onClick={onClose}
-                                    className="p-2 bg-brand-gray-light rounded-full text-brand-gray-dark hover:bg-brand-gray/20 transition-colors"
-                                >
-                                    <X size={24} />
-                                </button>
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        onClick={handleDelete}
+                                        disabled={isDeleting}
+                                        className={cn(
+                                            "p-2 rounded-full transition-all duration-200",
+                                            isConfirmingDelete
+                                                ? "bg-brand-red text-white animate-pulse"
+                                                : "bg-brand-gray-light text-brand-gray-dark hover:bg-brand-red/10 hover:text-brand-red"
+                                        )}
+                                    >
+                                        <Trash2 size={24} />
+                                    </button>
+                                    <button
+                                        onClick={handleModalClose}
+                                        className="p-2 bg-brand-gray-light rounded-full text-brand-gray-dark hover:bg-brand-gray/20 transition-colors"
+                                    >
+                                        <X size={24} />
+                                    </button>
+                                </div>
                             </div>
+
+                            {isConfirmingDelete && (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    className="bg-brand-red/5 border-2 border-brand-red/20 rounded-2xl p-4 mb-8 flex items-start gap-4"
+                                >
+                                    <AlertTriangle className="text-brand-red shrink-0" size={24} />
+                                    <div>
+                                        <p className="text-brand-red font-black text-sm uppercase">Delete this habit?</p>
+                                        <p className="text-brand-text font-bold text-xs opacity-70">This action cannot be undone. All progress will be lost.</p>
+                                    </div>
+                                </motion.div>
+                            )}
 
                             {/* Note Input */}
                             <div className="mb-8">
