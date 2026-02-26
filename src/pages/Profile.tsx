@@ -1,16 +1,25 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import MobileLayout from '../layouts/MobileLayout';
+import { useAuth } from '../context/AuthContext';
 import { useStreakData } from '../hooks/useStreakData';
 import { useMonthlyProgress } from '../hooks/useMonthlyProgress';
 import { useHabits } from '../hooks/useHabits';
 import { useNotifications } from '../hooks/useNotifications';
-import { Settings, Award, Zap, Bell, BellOff } from 'lucide-react';
+import { Settings, Award, Zap, Bell, BellOff, LogOut } from 'lucide-react';
 
 const Profile: React.FC = () => {
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
     const { streak } = useStreakData();
     const { level } = useMonthlyProgress();
     const { data: habits = [] } = useHabits();
     const { permission, requestPermission, sendTestNotification } = useNotifications();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login', { replace: true });
+    };
 
     // Calculate total completions from all time
     const totalCompletions = habits.reduce((acc, habit) =>
@@ -31,8 +40,9 @@ const Profile: React.FC = () => {
                             😎
                         </div>
                         <div className="text-center">
-                            <h1 className="text-2xl font-black">Habit Hero</h1>
-                            <p className="font-bold opacity-80">Level {level} Explorer</p>
+                            <h1 className="text-2xl font-black">{user?.name || 'Habit Hero'}</h1>
+                            <p className="font-bold opacity-80 text-sm">{user?.email}</p>
+                            <p className="font-bold opacity-80 mt-1">Level {level} Explorer</p>
                         </div>
                     </div>
                 </div>
@@ -88,7 +98,22 @@ const Profile: React.FC = () => {
                 <div className="p-6">
                     <h2 className="text-xl font-black text-brand-text mb-4">Settings</h2>
                     <div className="bg-white rounded-2xl border-2 border-brand-gray overflow-hidden">
-                        <div className="p-4 flex items-center justify-between border-b-2 border-brand-gray-light">
+                        <button
+                            onClick={handleLogout}
+                            className="w-full p-4 flex items-center justify-between border-b-2 border-brand-gray-light active:bg-brand-gray-light transition-colors"
+                        >
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-brand-red/10 text-brand-red rounded-xl">
+                                    <LogOut size={24} />
+                                </div>
+                                <div className="text-left">
+                                    <p className="font-bold text-brand-text">Log Out</p>
+                                    <p className="text-xs text-brand-gray-dark">Sign out of your account</p>
+                                </div>
+                            </div>
+                        </button>
+
+                        <div className="p-4 flex items-center justify-between">
                             <div className="flex items-center gap-3">
                                 <div className={`p-2 rounded-xl ${permission === 'granted' ? 'bg-brand-green/10 text-brand-green' : 'bg-brand-gray-light text-brand-gray-dark'}`}>
                                     {permission === 'granted' ? <Bell size={24} /> : <BellOff size={24} />}
